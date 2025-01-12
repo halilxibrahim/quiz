@@ -29,13 +29,34 @@ function MathTest() {
 
   const generateQuestion = () => {
     const operations = ["+", "-", "*", "/"];
-    const num1 = Math.floor(Math.random() * 10) + 1; // 1-10 arası
-    const num2 = Math.floor(Math.random() * 10) + 1; // 1-10 arası
-    const randomOp = operations[Math.floor(Math.random() * operations.length)];
+    const difficulty = Math.min(Math.floor(score / 5) + 1, 3); // Increase difficulty every 5 points, max 3
+    let num1, num2;
 
+    switch (difficulty) {
+      case 1:
+        num1 = Math.floor(Math.random() * 10) + 1; // 1-10 arası
+        num2 = Math.floor(Math.random() * 10) + 1; // 1-10 arası
+        break;
+      case 2:
+        num1 = Math.floor(Math.random() * 50) + 10; // 10-59 arası
+        num2 = Math.floor(Math.random() * 50) + 10; // 10-59 arası
+        break;
+      case 3:
+        num1 = Math.floor(Math.random() * 100) + 50; // 50-149 arası
+        num2 = Math.floor(Math.random() * 100) + 50; // 50-149 arası
+        break;
+      default:
+        num1 = Math.floor(Math.random() * 10) + 1;
+        num2 = Math.floor(Math.random() * 10) + 1;
+    }
+
+    const randomOp = operations[Math.floor(Math.random() * operations.length)];
     let generatedQuestion = `${num1} ${randomOp} ${num2}`;
-    // Bölme işlemi için tam sayı garantisi istemiyorsanız, bu koşulu es geçebilirsiniz.
-    // Tam sayı sonuç almak isterseniz, random seçimi tekrar üretebilirsiniz.
+
+    // Ensure division results in an integer
+    if (randomOp === "/") {
+      generatedQuestion = `${num1 * num2} / ${num2}`;
+    }
 
     setQuestion(generatedQuestion);
   };
@@ -52,12 +73,20 @@ function MathTest() {
     generateQuestion();
   };
 
+  const restartTest = () => {
+    setScore(0);
+    setTimeLeft(20);
+    setStatusMessage("");
+    generateQuestion();
+  };
+
   if (timeLeft <= 0) {
     return (
       <div className="card">
         <h1 className="heading">Zihinsel Hesaplama Testi</h1>
         <p>Süre Doldu!</p>
         <p>Skorunuz: {score}</p>
+        <button className="btn" onClick={restartTest}>Yeniden Başlat</button>
       </div>
     );
   }

@@ -9,11 +9,9 @@ import PerceptualSpeedTest from "./components/PerceptualSpeedTest";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
       if (window.innerWidth >= 768) {
         setMenuOpen(false);
       }
@@ -27,7 +25,7 @@ function App() {
     <Router>
       <div className={styles.app}>
         <nav className={styles.navbar}>
-          <div className={styles.navBrand}>Test Uygulaması</div>
+          <div className={styles.navBrand}>Quiz</div>
           
           <button 
             className={`${styles.hamburger} ${menuOpen ? styles.active : ''}`}
@@ -64,6 +62,11 @@ function App() {
             />
           </Routes>
         </div>
+        <footer className={styles.footer}>
+          <p>
+            Powered by <a href="https://read.cv/halil.ibrahim" target="_blank" rel="noopener noreferrer">Halil İbrahim Kamacı</a>
+          </p>
+        </footer>
       </div>
     </Router>
   );

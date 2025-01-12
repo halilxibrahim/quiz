@@ -2,6 +2,11 @@
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .navbar {
@@ -10,6 +15,13 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .navBrand {
@@ -63,10 +75,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
   }
 
   .hamburger {
     display: flex;
+    position: relative;
+    right: 0;
+    top: 0;
   }
 
   .navLinks {
@@ -79,6 +95,8 @@
     background-color: #1E90FF;
     padding: 1rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    width: 100%;
+    margin-top: 1rem;
   }
 
   .navLinks.active {
@@ -96,6 +114,10 @@
   .hamburger.active span:last-child {
     transform: rotate(-45deg) translate(6px, -6px);
   }
+
+  .content {
+    padding: 15px;
+  }
 }
 
 /* Küçük mobil cihazlar için ek düzenlemeler */
@@ -108,8 +130,53 @@
     padding: 0.7rem 0;
     font-size: 0.9rem;
   }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar {
+    padding: 0.5rem;
+  }
+
+  .navBrand {
+    font-size: 1rem;
+  }
+
+  .navLinks a {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .content {
+    padding: 10px;
+  }
+
+  .footer {
+    padding: 0.5rem;
+  }
 }
 
 .content {
+  flex: 1;
   padding: 20px;
+  max-width: 100%;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+.footer {
+  padding: 1rem;
+  text-align: center;
+  background-color: #f5f5f5;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
 }
